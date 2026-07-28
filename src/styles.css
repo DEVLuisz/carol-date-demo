@@ -1,0 +1,291 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-cream: var(--cream);
+  --color-plum: var(--plum);
+  --color-bubble: var(--bubble);
+  --color-honey: var(--honey);
+  --font-display: "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1.25rem;
+
+  --background: oklch(0.19 0.055 328);
+  --foreground: oklch(0.97 0.015 340);
+  --card: oklch(0.25 0.062 330);
+  --card-foreground: oklch(0.97 0.015 340);
+  --popover: oklch(0.25 0.062 330);
+  --popover-foreground: oklch(0.97 0.015 340);
+
+  --primary: oklch(0.75 0.17 355);
+  --primary-foreground: oklch(0.2 0.06 330);
+  --secondary: oklch(0.32 0.07 330);
+  --secondary-foreground: oklch(0.97 0.015 340);
+  --muted: oklch(0.3 0.055 330);
+  --muted-foreground: oklch(0.78 0.04 335);
+  --accent: oklch(0.83 0.13 85);
+  --accent-foreground: oklch(0.2 0.06 330);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 340);
+
+  --border: oklch(0.38 0.07 332);
+  --input: oklch(0.34 0.06 332);
+  --ring: oklch(0.75 0.17 355);
+
+  --cream: oklch(0.96 0.03 80);
+  --plum: oklch(0.14 0.05 325);
+  --bubble: oklch(0.85 0.09 210);
+  --honey: oklch(0.86 0.13 85);
+
+  --gradient-dream: radial-gradient(
+      120% 80% at 15% 0%,
+      color-mix(in oklab, var(--primary) 32%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(100% 70% at 90% 10%, color-mix(in oklab, var(--bubble) 22%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--plum), var(--background));
+  --gradient-petal: linear-gradient(135deg, var(--primary), var(--honey));
+  --shadow-soft: 0 24px 60px -24px color-mix(in oklab, var(--plum) 90%, transparent);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--primary) 35%, transparent),
+    0 18px 50px -18px color-mix(in oklab, var(--primary) 60%, transparent);
+}
+
+.dark {
+  --background: oklch(0.19 0.055 328);
+  --foreground: oklch(0.97 0.015 340);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background: var(--gradient-dream);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility text-gradient {
+  background: var(--gradient-petal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility surface-card {
+  background: color-mix(in oklab, var(--card) 88%, transparent);
+  border: 1px solid color-mix(in oklab, var(--primary) 22%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1.5deg);
+  }
+}
+
+@keyframes heart-rise {
+  0% {
+    transform: translateY(20px) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes pin-pop {
+  0% {
+    transform: scale(0) translateY(10px);
+  }
+  70% {
+    transform: scale(1.15) translateY(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 55%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 22px transparent;
+  }
+}
+
+@keyframes shimmer-line {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+@utility animate-heart-rise {
+  animation: heart-rise 3.2s ease-out infinite;
+}
+
+@utility animate-pin-pop {
+  animation: pin-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+@utility shimmer-text {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--foreground) 55%, transparent),
+    var(--color-accent),
+    color-mix(in oklab, var(--foreground) 55%, transparent)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-line 2.4s linear infinite;
+}
+
+/* --- mapa real de São Paulo (Leaflet) --- */
+.sp-map-shell .leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: var(--plum);
+  font-family: var(--font-sans);
+}
+
+.sp-map-shell .leaflet-control-attribution {
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+  color: var(--muted-foreground);
+  font-size: 9px;
+}
+
+.sp-map-shell .leaflet-control-attribution a {
+  color: var(--muted-foreground);
+}
+
+.sp-map-shell .leaflet-bar a {
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  color: var(--foreground);
+  border-color: color-mix(in oklab, var(--primary) 30%, transparent);
+}
+
+.sp-map-shell .leaflet-popup-content-wrapper,
+.sp-map-shell .leaflet-popup-tip {
+  background: var(--popover);
+  color: var(--popover-foreground);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.sp-map-shell .leaflet-popup-content {
+  margin: 0.7rem 0.9rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.sp-map-shell .leaflet-popup-close-button {
+  color: var(--muted-foreground);
+}
+
+.sp-pin {
+  display: flex;
+  height: 38px;
+  width: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--primary) 55%, transparent);
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  font-size: 1.05rem;
+  box-shadow: var(--shadow-glow);
+  transition: transform 0.25s ease;
+  animation: pin-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.sp-pin:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+.sp-pin-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  transform: scale(1.12);
+  animation: pulse-ring 1.8s ease-out infinite;
+}
