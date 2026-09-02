@@ -1,11 +1,5 @@
 
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+A ideia foi boa mas a exultação nunca saiu do papel
 
 ## Built with
 
